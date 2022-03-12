@@ -23,11 +23,23 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   response => {
+    message.success("登录成功");
     NProgress.done();
     return response.data;
   },
   error => {
-    message.error('网络请求错误');
+    if(error && error.response) {
+      switch(error.response.status) {
+          case 400:
+            message.error('用户名不存在~');
+              break;
+          case 401:
+            message.error('未授权访问');
+              break;
+          default:
+            message.error('网络请求错误');
+      }
+    }
     NProgress.done();
     return Promise.reject(error)
 }

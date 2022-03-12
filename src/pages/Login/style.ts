@@ -12,31 +12,17 @@ export const XZloginWrapper = styled.div`
   h1 {
     text-align: center;
     font-weight: 700;
+    padding-top: 20px;
   }
   .loginPanel {
     width: 320px;
     margin-bottom: 20px;
-    /* antd登录框tab样式重写 */
-    .TabWrapper {
-      .ant-tabs {
-        border: 1px solid #dcdfe6;
-        box-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%), 0 0 6px 0 rgb(0 0 0 / 4%);;
-        .ant-tabs-nav-more {
-          display: none;
-        }
-        .ant-tabs-tab-btn {
-          width: 100%;
-        }
-      }
-      .ant-tabs-tab, .ant-tabs-tab-active {
-        /* width: 50% !important; */
-        width: 160px;
-        text-align: center;
-      }
-    }
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%), 0 0 6px 0 rgb(0 0 0 / 4%);
     .submit {
-      margin-top: 20px;
       width: 100%;
+      margin-left: 65px;
+      margin-top: 5px;
     }
   }
 `
