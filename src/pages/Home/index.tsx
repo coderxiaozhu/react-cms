@@ -1,15 +1,14 @@
 import React, { memo, useState } from 'react'
-import { Layout, Menu } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import {
   MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
+  MenuFoldOutlined
 } from '@ant-design/icons';
 import { XZhomeWrapper } from './style';
+import { Outlet } from 'react-router-dom';
+import LeftBar from '../../components/leftBar';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 const Home = memo(() => {
   const [collapsed, setCollapsed] = useState(false)
@@ -20,25 +19,19 @@ const Home = memo(() => {
   return (
     <XZhomeWrapper>
       <Layout className="container">
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
-          </Menu>
-        </Sider>
+        <LeftBar collapsed={collapsed} />
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>
             <div className='toggleIcon' onClick={ toggle }>
               {
                 collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>
               }
+            </div>
+            <div className='breadBox'>
+              <Breadcrumb>
+                <Breadcrumb.Item>系统总览</Breadcrumb.Item>
+                <Breadcrumb.Item>核心技术</Breadcrumb.Item>
+              </Breadcrumb>
             </div>
           </Header>
           <Content
@@ -48,7 +41,7 @@ const Home = memo(() => {
               padding: 24,
             }}
           >
-            Content
+            <Outlet />
           </Content>
         </Layout>
       </Layout>

@@ -38,5 +38,8 @@ export const XZhomeWrapper = styled.div`
         }
       }
     }
+    .breadBox {
+      margin-left: 60px;
+    }
   }
 `
