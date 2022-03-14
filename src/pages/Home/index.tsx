@@ -1,12 +1,14 @@
-import React, { memo, useState } from 'react'
-import { Layout, Breadcrumb } from 'antd';
+import React, { memo, useEffect, useState } from 'react'
+import { Layout, Button } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined
 } from '@ant-design/icons';
 import { XZhomeWrapper } from './style';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import LeftBar from '../../components/leftBar';
+import SubTitle from '../../components/subTitle';
+import { rm } from '../../network/request/storage';
 
 const { Header, Content } = Layout;
 
@@ -16,6 +18,22 @@ const Home = memo(() => {
   const toggle = () => {
     setCollapsed(!collapsed)
   }
+
+  const navigate = useNavigate()
+  const location = useLocation();
+
+  useEffect(() => {
+    if(location.pathname === '/home') {
+      navigate("/home/analysis/overview")
+    }
+  })
+
+  const loginOut = () => {
+    rm('token')
+    navigate("/login");
+  }
+
+
   return (
     <XZhomeWrapper>
       <Layout className="container">
@@ -28,10 +46,15 @@ const Home = memo(() => {
               }
             </div>
             <div className='breadBox'>
-              <Breadcrumb>
-                <Breadcrumb.Item>系统总览</Breadcrumb.Item>
-                <Breadcrumb.Item>核心技术</Breadcrumb.Item>
-              </Breadcrumb>
+              <SubTitle />
+            </div>
+            <div className='loginOut'>
+              <Button
+                type="primary"
+                onClick={ e => loginOut() }
+              >
+                退出登录
+              </Button>
             </div>
           </Header>
           <Content

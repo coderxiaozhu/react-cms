@@ -1,3 +1,4 @@
+// 左侧菜单栏
 import React, { memo } from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ interface LeftProps {
 }
 
 const LeftBar:React.FC<LeftProps> = memo((props) => {
+  // bingding events
   const getMenu = (rouerList: IRouter[]) => {
     return (
       <>
@@ -36,7 +38,11 @@ const LeftBar:React.FC<LeftProps> = memo((props) => {
   return (
     <>
       <Sider trigger={null} collapsible collapsed={props.collapsed}>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["/home/analysis/overview"]}
+          >
             { getMenu(leftRouter[0].children) }
           </Menu>
       </Sider>

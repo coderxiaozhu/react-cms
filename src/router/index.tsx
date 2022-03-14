@@ -26,8 +26,6 @@ const lazyLoad = (children: React.ReactNode) => {
   </Suspense>
 }
 
-const token = get('token');
-
 export interface IRouter {
   title?: string
   path: string
@@ -36,6 +34,8 @@ export interface IRouter {
   element?: ReactNode
   children?: IRouter[]
 }
+
+const token = get('token');
 
 const RootRouter = [
   {
@@ -157,10 +157,10 @@ const loginRouter = [
 const router = [
   ...RootRouter,
   ...leftRouter,
-  ...loginRouter
+  ...loginRouter,
 ]
 
 export {
   router,
-  leftRouter
+  leftRouter,
 }

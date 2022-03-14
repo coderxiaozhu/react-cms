@@ -41,5 +41,10 @@ export const XZhomeWrapper = styled.div`
     .breadBox {
       margin-left: 60px;
     }
+    .loginOut {
+      position: absolute;
+      right: 20px;
+      top: 2px;
+    }
   }
 `
