@@ -1,8 +1,12 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
+
+import { XZoverview } from './style';
 
 const Overview = memo(() => {
   return (
-    <div>Overview</div>
+    <XZoverview>
+      Overview
+    </XZoverview>
   )
 })
 

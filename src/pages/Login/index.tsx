@@ -1,5 +1,5 @@
 import React, { memo, createRef } from 'react'
-import { Form, Input, Button, FormInstance } from 'antd';
+import { Form, Input, Button, FormInstance, message } from 'antd';
 import { getAccountLogin } from '../../network/Login'
 import { XZloginWrapper } from './style'
 import { add } from '../../network/request/storage';
@@ -22,7 +22,7 @@ const XZlogin = memo(() => {
       const { code } = res;
       const { token, name } = res.data;
       if(code === 0) {
-        console.log(token)
+        message.success("登陆成功");
         add('token', token);
         add('username', name);
         navigate('/home')

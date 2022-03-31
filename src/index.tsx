@@ -4,7 +4,7 @@ import './assets/css/reset.css'
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App'
-import store from './store/index'
+import {store} from './store/index'
 
 ReactDOM.render(
   <HashRouter>

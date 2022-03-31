@@ -23,7 +23,6 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   response => {
-    message.success("登录成功");
     NProgress.done();
     return response.data;
   },
