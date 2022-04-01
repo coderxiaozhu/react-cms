@@ -1,12 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
-interface charState {
+
+interface charItemState {
   code: Number;
   data: any[]
 }
 
+interface charState {
+  pieObj: charItemState,
+  mapObj: charItemState,
+  lineObj: charItemState,
+  roseObj: charItemState
+}
+
 const initialState: charState = {
-  code: 0,
-  data: []
+  pieObj: {
+    code: 0,
+    data: []
+  },
+  mapObj: {
+    code: 0,
+    data: []
+  },
+  lineObj: {
+    code: 0,
+    data: []
+  },
+  roseObj: {
+    code: 0,
+    data: []
+  }
 }
 
 export const dashboardReducer = createSlice({
@@ -14,11 +36,18 @@ export const dashboardReducer = createSlice({
   initialState,
   reducers: {
     getBingData: (state, action) => {
-      const { code, data } = action.payload;
-      state.code = code;
-      state.data = data
+      state.pieObj = action.payload;
+    },
+    getMapData: (state, action) => {
+      state.mapObj = action.payload;
+    },
+    getLineData: (state, action) => {
+      state.lineObj = action.payload;
+    },
+    getRoseData: (state, action) => {
+      state.roseObj = action.payload
     }
   }
 })
 
-export const { getBingData } = dashboardReducer.actions
+export const { getBingData, getMapData, getLineData, getRoseData } = dashboardReducer.actions

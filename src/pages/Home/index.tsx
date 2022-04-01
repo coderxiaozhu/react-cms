@@ -38,7 +38,7 @@ const Home = memo(() => {
     <XZhomeWrapper>
       <Layout className="container">
         <LeftBar collapsed={collapsed} />
-        <Layout className="site-layout">
+        <Layout className="site-layout" style={{ marginLeft: 200 }}>
           <Header className="site-layout-background" style={{ padding: 0 }}>
             <div className='toggleIcon' onClick={ toggle }>
               {
@@ -62,6 +62,7 @@ const Home = memo(() => {
             style={{
               margin: '24px 16px',
               padding: 24,
+              overflow: 'initial'
             }}
           >
             <Outlet />

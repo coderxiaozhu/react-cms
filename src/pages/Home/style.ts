@@ -5,7 +5,6 @@ export const XZhomeWrapper = styled.div`
   height: 100%;
   .container {
     width: 100%;
-    height: 100%;
   }
   #components-layout-demo-custom-trigger .trigger {
     padding: 0 24px;
@@ -47,4 +46,5 @@ export const XZhomeWrapper = styled.div`
       top: 2px;
     }
   }
+
 `
