@@ -3,8 +3,8 @@ import ReactEcharts from 'echarts-for-react';
 
 import { DataType } from './types';
 import { convertData } from '../../utils/convert-data'
-import chinaMap from '../../utils/chinaMap.json'
-import * as echarts from 'echarts/core';
+import chinaMap from '../../utils/china.json'
+import * as echarts from 'echarts';
 
 interface MapData {
   mapData: DataType[];
