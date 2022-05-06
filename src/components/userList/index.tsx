@@ -1,15 +1,27 @@
 import React, { memo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Button,
-  Table
-} from 'antd'
+  Table,
+  Tag,
+  Space
+} from 'antd';
+import {
+  EditOutlined,
+  DeleteOutlined
+} from '@ant-design/icons'
+
 import { XZuserListWapper } from './style';
 import { DataType } from './types';
+import { formatDate } from '../../utils/date-formate';
+import { RootState } from '../../store';
 
+// 表格列的数据
 const columns = [
   {
     title: '序号',
-    dataIndex: 'key',
+    dataIndex: 'id',
+    render: (text:any, record:any, index:number)=> `${index + 1}`
   },
   {
     title: '用户名',
@@ -25,48 +37,70 @@ const columns = [
   },
   {
     title: '状态',
-    dataIndex: 'enable'
+    dataIndex: 'enable',
+    render: (enable: Number) => {
+      let color = enable === 1 ? "success" : "error";
+      let text = enable === 1 ? "启用" : "禁用";
+      return (
+        <Tag color={color}>
+          { text }
+        </Tag>
+      )
+    }
   },
   {
     title: '创建时间',
-    dataIndex: 'createAt'
+    dataIndex: 'createAt',
+    render: (createAt: string) => {
+      return formatDate(createAt);
+    }
   },
   {
     title: '更新时间',
-    dataIndex: 'updateAt'
+    dataIndex: 'updateAt',
+    render: (createAt: string) => {
+      return formatDate(createAt);
+    }
   },
   {
     title: '操作',
-    dataIndex: 'operation'
+    dataIndex: 'operation',
+    render: (operation: string) => {
+      return (
+        <Space
+        style={{ display: 'flex', justifyContent: "space-around" }}
+        >
+          <Button type='primary'>
+          <EditOutlined/>
+          编辑
+          </Button>
+          <Button type='primary'>
+          <DeleteOutlined />
+          删除
+          </Button>
+        </Space>
+      )
+    }
   }
 ];
-
-
-const data: DataType[] = [
-  {
-    key: 1,
-    name: "coderwhy",
-    realname: "coderwhy",
-    cellphone: 18812345678,
-    enable: 1,
-    departmentId: 1,
-    roleId: 1,
-    createAt: "2021-01-02T10:20:26.000Z",
-    updateAt: "2021-01-03T04:50:13.000Z"
-  }
-];
-
-const rowSelection = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: (record: DataType) => ({
-    name: record.name,
-  }),
-};
 
 const XZuserList = memo(() => {
+  // state hook
   const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>('checkbox');
+
+  // other hook
+  const tableData = useSelector((state: RootState) => state.userReducer.userListData.data);
+  console.log(tableData.list);
+
+  // bind event
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: (record: DataType) => ({
+      name: record.name,
+    }),
+  };
   return (
     <XZuserListWapper>
       <div className='header'>
@@ -80,7 +114,8 @@ const XZuserList = memo(() => {
       </div>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={tableData.list}
+        rowKey={record => record.id}
         rowSelection={{
           type: selectionType,
           ...rowSelection,
